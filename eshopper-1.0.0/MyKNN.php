@@ -6,8 +6,8 @@ function forMin($sample,  $predictData,$Minn=0)
 
         $lengthPredict = count($predictData);
         $length = count($sample);
-        echo "lengthPredict: $lengthPredict<br>";
-        echo "length: $length<br>";
+       // echo "lengthPredict: $lengthPredict<br>";
+       // echo "length: $length<br>";
 
 
 

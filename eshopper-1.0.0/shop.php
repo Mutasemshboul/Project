@@ -401,8 +401,8 @@
 
 
  
-<form action="/action_page.php">
-<select style="padding: 10px;  background:#edf2ff; border:none;">
+<form action="shop.php" method="post">
+<select style="padding: 10px;  background:#edf2ff; border:none;" name="man">
   <?php
     include 'DBconn.php';
     $S1 = "SELECT  DISTINCT(Manufacturer) as Manufacturer from Laptops";
@@ -415,7 +415,7 @@
     
     ?>
 </select>
-<select style="padding: 10px;  background:#edf2ff; border:none;">
+<select style="padding: 10px;  background:#edf2ff; border:none;" name="ram">
   <?php
     include 'DBconn.php';
     $S1 = "SELECT  DISTINCT(RAM) as RAM from Laptops";
@@ -429,7 +429,7 @@
     ?>
 </select>
 
-<select style="padding: 10px;  background:#edf2ff; border:none;">
+<select style="padding: 10px;  background:#edf2ff; border:none;" name="cat">
   <?php
     include 'DBconn.php';
     $S1 = "SELECT  DISTINCT(Category) as Category from Laptops";
@@ -442,6 +442,47 @@
     
     ?>
 </select>
+<select style="padding: 10px;  background:#edf2ff; border:none;" name="cpu">
+  <?php
+    include 'DBconn.php';
+    $S1 = "SELECT  DISTINCT(CPU) as CPU from Laptops";
+    $ram=mysqli_query($connection,$S1);
+    while($row=mysqli_fetch_array($ram)){
+      echo '<option value="'.$row['CPU'].'">'.$row['CPU'].'</option>';
+    }
+
+    
+    
+    ?>
+</select>
+<select style="padding: 10px;  background:#edf2ff; border:none;" name="gpu">
+  <?php
+    include 'DBconn.php';
+    $S1 = "SELECT  DISTINCT(GPU) as GPU from Laptops";
+    $ram=mysqli_query($connection,$S1);
+    while($row=mysqli_fetch_array($ram)){
+      echo '<option value="'.$row['GPU'].'">'.$row['GPU'].'</option>';
+    }
+
+    
+    
+    ?>
+</select>
+<select style="padding: 10px;  background:#edf2ff; border:none;" name="storage">
+  <?php
+    include 'DBconn.php';
+    $S1 = "SELECT  DISTINCT(Storage) as Storage from Laptops";
+    $ram=mysqli_query($connection,$S1);
+    while($row=mysqli_fetch_array($ram)){
+      echo '<option value="'.$row['Storage'].'">'.$row['Storage'].'</option>';
+    }
+
+    
+    ?>
+</select>
+    <input type="text" required name="price">
+    <input type="submit" name="sub">
+
 
 </form>
 
@@ -486,24 +527,69 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-                        <div class="card product-item border-0 mb-4">
-                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
-                            </div>
-                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
-                                <div class="d-flex justify-content-center">
-                                    <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                    <?php
+                        include "DBconn.php";
+                        include "MyKNN.php";
+                        $sql = "select * from laptops";
+                        $res = mysqli_query($connection,$sql);
+                        $sql2 = "select min(Price) as minprice from laptops";
+                        $resminprice = mysqli_query($connection,$sql2);
+                        $MinPrice = $row=mysqli_fetch_array($resminprice)["minprice"];
+                        //print_r($row=mysqli_fetch_array($res));
+
+
+                        while($row=mysqli_fetch_array($res)){
+                            $sample[] = [$row['Manufacturer'],$row['Price'],$row['Category'],$row["RAM"],$row['CPU'],$row['GPU'],$row['Storage'],$row['ID']];
+                        }
+
+                        //print_r($sample[0][1]);
+                        if(isset($_POST['sub'])){
+                            $man = $_POST['man'];
+                            $cat = $_POST['cat'];
+                            $ram = $_POST['ram'];
+                            $cpu = $_POST['cpu'];
+                            $gpu = $_POST['gpu'];
+                            $storage = $_POST['storage'];
+                            $price = $_POST['price'];
+                            $s=ForMin($sample,[$man,$price,$cat,$ram,$cpu,$gpu,$storage],$MinPrice);
+
+                        }
+                        else{
+                            $s=ForMin($sample,["Lenovo",1000,"Gaming","16GB","Intel Core i5 2.3GHz","ntel Iris Plus Graphics 640","128GB SSD"],$MinPrice);
+
+                        }
+                        //print_r($s);
+                        for($i=0;$i<5;$i++){
+                            $a = $s[$i][1];
+                            //print_r($s[$i]);
+                            $sql = "select * from laptops where ID='$a'";
+                            $res = mysqli_query($connection,$sql);
+                            $row=mysqli_fetch_array($res);
+                            echo' <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                            <div class="card product-item border-0 mb-4">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
+                                </div>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3">'.$row['Manufacturer'].'</h6>
+                                    <div class="d-flex justify-content-center">
+                                        <h6>'.$row['Price'].'</h6><h6 class="text-muted ml-2">$'.$row['RAM'].'</h6>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-between bg-light border">
+                                    <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                                    <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                        </div>';
+                            //print_r($row=mysqli_fetch_array($res));
+                            //echo"<hr>";
+                        }
+
+
+?>
+                   
+                    <!-- <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                 <img class="img-fluid w-100" src="img/product-2.jpg" alt="">
@@ -659,7 +745,7 @@
                             </li>
                           </ul>
                         </nav>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- Shop Product End -->
