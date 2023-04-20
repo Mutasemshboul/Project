@@ -11,9 +11,9 @@ if(isset($_POST['submit'])){
     $row = mysqli_fetch_array($res);
         
     session_start();
-    $_SESSION['UserID']=$row['id'];
+    $_SESSION['UserID']=$row['ID'];
     $_SESSION['Email']=$row['Email'];
-    //$_SESSION['RoleFk'] = $row['RoleFk'];
+    $_SESSION['RoleFk'] = $row['Role'];
     $_SESSION['Name'] = $row['Name'];
 
     if($row){

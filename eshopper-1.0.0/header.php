@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(empty($_SESSION['UserID'])){
+
+    header('location:signin.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -95,8 +103,12 @@
                             <a href="contact.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
+                        <?php echo'<a  class="nav-item nav-link">'.$_SESSION['Name'].'</a>'  ?>
                             <a href="" class="nav-item nav-link">Login</a>
                             <a href="" class="nav-item nav-link">Register</a>
+                            <a href="LogOut.php" class="nav-item nav-link">Logout</a>
+                            
+                            
                         </div>
                     </div>
                 </nav>
