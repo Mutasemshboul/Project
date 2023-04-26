@@ -5,5 +5,5 @@ $id = $_POST["cart"];
 $userId=$_SESSION['UserID'];
 $sql = "insert into shppoingcart values('',$id,$userId)";
 mysqli_query($connection,$sql);
-header('location:shop.php');
+header('location:Laptop.php');
 ?>

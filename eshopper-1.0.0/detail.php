@@ -69,10 +69,11 @@
                 </div> -->
                 
                 
-
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                <form method="post" action="cartCode.php">
+                    <button class="btn btn-primary px-3" name="cart" value=<?php echo"$id"?>><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                </form>
                 </div>
-               
+        </div>
             </div>
         </div>
         <div class="row px-xl-5">

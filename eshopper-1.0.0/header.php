@@ -88,7 +88,14 @@ if(empty($_SESSION['UserID'])){
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="index1.php" class="nav-item nav-link active">Home</a>
-                            <a href="shop.php" class="nav-item nav-link">Shop</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Shop</a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="Laptop.php" class="dropdown-item">Laptops</a>
+                                    <a href="Hardware.php" class="dropdown-item">Hardware</a>
+                                </div>
+                            </div>
+                            
                             <!-- <a href="detail.php" class="nav-item nav-link">Shop Detail</a> -->
                             <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
                             <a href="checkout.php" class="nav-item nav-link">Checkout</a>
