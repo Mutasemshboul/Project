@@ -75,7 +75,7 @@
                         <h5>&nbsp;</h5>
                         </form>
                         <form method="post" action="cartCode.php">
-                        <button type="submit" class="btn btn-sm text-dark p-0" value="' . $row['Id'] . '"  name="cart" style="background-color:white" ><i class="fas fa-shopping-cart text-primary mr-1"></i>Add Cart</button>
+                        <button type="submit" class="btn btn-sm text-dark p-0" value="h' . $row['Id'] . '"  name="cart" style="background-color:white" ><i class="fas fa-shopping-cart text-primary mr-1"></i>Add Cart</button>
                             <h5>&nbsp;</h5>
                             </form>
             

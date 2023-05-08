@@ -25,7 +25,6 @@
                         <?php 
                         include 'DBconn.php';
                         //session_start();
-                        $_SESSION['UserID'];
                         $sql ='select * from shppoingcart where UserId  = '.$_SESSION['UserID'].'';
                         $res = mysqli_query($connection,$sql);
                         while($row=mysqli_fetch_array($res)){
@@ -52,7 +51,39 @@
                                 </td>
                                 <td class="align-middle">$150</td>
                                 <form method="post" action="Deletefromcart.php">
-                                <td class="align-middle"><button value='.$row['Id'].'  name="Delete" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle"><button value=l'.$row['Id'].'  name="Delete" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                </form>
+                            </tr>';
+                            }
+                            
+                        }
+                        $sql ='select * from hardwareshoppingcart where UserId  = '.$_SESSION['UserID'].'';
+                        $res = mysqli_query($connection,$sql);
+                        while($row=mysqli_fetch_array($res)){
+                            $sql2 ='select * from hardware where Id ='.$row['HardwareId'].'';
+                            $res2 = mysqli_query($connection,$sql2);
+                            while($row2=mysqli_fetch_array($res2)){
+                                echo '<tr>
+                                <td class="align-middle">'.$row2['Name'].'</td>
+                                <td class="align-middle">$'.$row2['Price'].'</td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-minus" >
+                                            <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">$150</td>
+                                <form method="post" action="Deletefromcart.php">
+                                <td class="align-middle"><button value=h'.$row['Id'].'  name="Delete" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
                                 </form>
                             </tr>';
                             }
