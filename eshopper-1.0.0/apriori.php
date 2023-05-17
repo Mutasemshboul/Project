@@ -94,7 +94,6 @@ return true;
 
 }
 
-// Example usage:
 // $transactions = [
 // ['1', '2', '3'],
 // ['1', '3'],
@@ -115,47 +114,47 @@ return true;
 //   echo"<br>";
 // }
 
-// $S1 = "SELECT  DISTINCT(UserID) as UserID from Orders";
+$S1 = "SELECT  DISTINCT(UserID) as UserID from orders";
 
-// $user=mysqli_query($connection,$S1);
-
-
-// $arr_users = array();
+$user=mysqli_query($connection,$S1);
 
 
-
-// while($Row = mysqli_fetch_array($user))
-// {
-//     array_push($arr_users,$Row["UserID"]);
-// }
+$arr_users = array();
 
 
-// $arr=[];
-// for($i=0;$i<count($arr_users);$i++){
-//     $S2=  "select ProductID from Orders where UserID='.$arr_users[$i].'";
-//     $res = mysqli_query($connection,$S2);
-//     while($row=mysqli_fetch_array($res)){
-//         $arr[$i][]=$row[0];
-//         //echo"<br>";
 
-// }
+while($Row = mysqli_fetch_array($user))
+{
+    array_push($arr_users,$Row["UserID"]);
+}
 
-// }
 
-// $apriori = new Apriori($arr, 0.6);
-// $apriori->mineAssociations();
+$arr=[];
+for($i=0;$i<count($arr_users);$i++){
+    $S2=  "select ProductID from Orders where UserID='.$arr_users[$i].'";
+    $res = mysqli_query($connection,$S2);
+    while($row=mysqli_fetch_array($res)){
+        $arr[$i][]=$row[0];
+        //echo"<br>";
 
-// $frequentItemsets = $apriori->getFrequentItemsets($arr);
-// $parr = [];
-// //print_r($frequentItemsets);
-// foreach($frequentItemsets as $I=>$v){
-//   $parr = explode(" ",$I);
-//   //print_r($parr);
-//   break;
-//   echo"<br>";
-// }
-// print_r($parr)
-//print_r($arr);
+}
 
+}
+
+$apriori = new Apriori($arr, 0.6);
+$apriori->mineAssociations();
+
+$frequentItemsets = $apriori->getFrequentItemsets($arr);
+$parr = [];
+//print_r($frequentItemsets);
+foreach($frequentItemsets as $I=>$v){
+  $parr = explode(" ",$I);
+  //print_r($parr);
+  break;
+  echo"<br>";
+}
+print_r($parr);
+// print_r($arr);
+// print_r($arr_users);
 ?>
 
