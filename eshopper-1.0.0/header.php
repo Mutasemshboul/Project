@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(empty($_SESSION['UserID'])){
+if (empty($_SESSION['UserID'])) {
 
     header('location:signin.php');
 }
@@ -21,7 +21,7 @@ if(empty($_SESSION['UserID'])){
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -31,12 +31,49 @@ if(empty($_SESSION['UserID'])){
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#price-filter').on('input', function() {
+                var value = $(this).val();
+                $('#price-value').html('$' + value);
+                var progress = (value / 3000) * 100;
+                $('.progress').css('width', progress + '%');
+            });
+        });
+
+        $(document).ready(function() {
+            $("#lap").click(function() {
+                $("#sub").toggle();
+            });
+        });
+    </script>
+
+
+
+    <style>
+        #mySelect {
+            appearance: none;
+        }
+        
+    </style>
+
+
+
+
+
+
+
+
+
+
 </head>
 
 <body>
     <!-- Topbar Start -->
     <div class="container-fluid">
-        
+
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
@@ -74,8 +111,8 @@ if(empty($_SESSION['UserID'])){
     <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                
-                
+
+
             </div>
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
@@ -95,11 +132,11 @@ if(empty($_SESSION['UserID'])){
                                     <a href="Hardware.php" class="dropdown-item">Hardware</a>
                                 </div>
                             </div>
-                            
+
                             <!-- <a href="detail.php" class="nav-item nav-link">Shop Detail</a> -->
                             <a href="cart.php" class="nav-item nav-link">Shopping Cart</a>
                             <a href="checkout.php" class="nav-item nav-link">Checkout</a>
-                            
+
                             <!-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -110,16 +147,16 @@ if(empty($_SESSION['UserID'])){
                             <a href="contact.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                        <?php echo'<a  class="nav-item nav-link">'.$_SESSION['Name'].'</a>'  ?>
+                            <?php echo '<a  class="nav-item nav-link">' . $_SESSION['Name'] . '</a>'  ?>
                             <a href="" class="nav-item nav-link">Login</a>
                             <a href="" class="nav-item nav-link">Register</a>
                             <a href="LogOut.php" class="nav-item nav-link">Logout</a>
-                            
-                            
+
+
                         </div>
                     </div>
                 </nav>
-              
+
             </div>
         </div>
     </div>

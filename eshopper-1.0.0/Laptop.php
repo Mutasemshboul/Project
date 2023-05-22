@@ -9,12 +9,12 @@
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
         <!-- Shop Sidebar Start -->
-        <div class="col-lg-3 col-md-12">
-            <!-- Price Start -->
+        <!-- <div class="col-lg-3 col-md-12"> -->
+        <!-- Price Start -->
 
 
 
-            <form action="Laptop.php" method="post">
+        <!-- <form action="Laptop.php" method="post">
                 <select style="padding: 10px;  background:#edf2ff; border:none;" name="man">
                     <?php
                     include 'DBconn.php';
@@ -68,19 +68,7 @@
 
                     ?>
                 </select>
-                <!-- <select style="padding: 10px;  background:#edf2ff; border:none;" name="gpu">
-  <?php
-    include 'DBconn.php';
-    $S1 = "SELECT  DISTINCT(GPU) as GPU from Laptops2";
-    $ram = mysqli_query($connection, $S1);
-    while ($row = mysqli_fetch_array($ram)) {
-        echo '<option value="' . $row['GPU'] . '">' . $row['GPU'] . '</option>';
-    }
 
-
-
-    ?> -->
-                </select>
                 <select style="padding: 10px;  background:#edf2ff; border:none;" name="storage">
                     <?php
                     include 'DBconn.php';
@@ -97,7 +85,85 @@
                 <input type="submit" name="sub">
 
 
-            </form>
+
+
+            </form> -->
+
+        <!-- <form action="shop.php" method="post">
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>Manufacturer</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Manufacturer) as Manufacturer from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Manufacturer'] . '">' . $row['Manufacturer'] . '</option>';
+                                }
+
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>RAM</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(RAM) as RAM from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['RAM'] . '">' . $row['RAM'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>Category</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Category) as Category from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Category'] . '">' . $row['Category'] . '</option>';
+                                }
+
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>CPU</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(CPU) as CPU from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['CPU'] . '">' . $row['CPU'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>Storage</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Storage) as Storage from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Storage'] . '">' . $row['Storage'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="nav-link text-center" style="border: 1px solid black; color: #D19C97;">
+                            <input type="range" class="w-100" id="price-filter" name="price-filter" min="0" max="3000" value="1500">
+                            <span id="price-value">$1500</span>
+                    </div>
+                    </form> -->
 
 
 
@@ -106,10 +172,224 @@
 
 
 
+
+
+
+        <!-- </div> -->
+        <!-- <div class="col-lg-3 d-none d-lg-block">
+
+            <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <h6 class="m-0">Laptops</h6>
+                <i class="fa fa-angle-down text-dark"></i>
+            </a>
+            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 318px">
+
+
+                    <form action="Laptop.php" method="post">
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" name="man" id="mySelect">
+                                <option selected value="HP" disabled>Manufacturer</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Manufacturer) as Manufacturer from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Manufacturer'] . '">' . $row['Manufacturer'] . '</option>';
+                                }
+
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" name="ram" data-toggle="dropdown" id="mySelect">
+                                <option selected value="4" disabled>RAM</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(RAM) as RAM from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['RAM'] . '">' . $row['RAM'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" name="cat" id="mySelect">
+                                <option selected value="Gaming" disabled>Category</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Category) as Category from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Category'] . '">' . $row['Category'] . '</option>';
+                                }
+
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" name="cpu" id="mySelect">
+                                <option selected value="Intel Core i7" disabled>CPU</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(CPU) as CPU from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['CPU'] . '">' . $row['CPU'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" data-toggle="dropdown" name="storage" id="mySelect">
+                                <option selected value="512GB SSD" disabled>Storage</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Storage) as Storage from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Storage'] . '">' . $row['Storage'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="nav-link text-center" style="border: 1px solid black; color: #D19C97;">
+                            <input type="range" class="w-100" id="price-filter" name="price" min="0" max="3000" value="1500">
+                            <span id="price-value">$1500</span>
+                        </div>
+
+                        <div class="nav-item dropdown d-flex" style="border: 1px solid black; color: #D19C97;">
+                            <input type="submit" name="sub">
+
+                        </div>
+
+                    </form>
+                   
+                </div>
+
+            </nav>
+        </div> -->
+
+        <!-- Shop Sidebar End -->
+
+        <div class="col-lg-3 d-none d-lg-block">
+
+            <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" id="lap" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <h6 class="m-0">Laptops</h6>
+                <i class="fa fa-angle-down text-dark"></i>
+            </a>
+            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 318px">
+
+
+                    <form action="Laptop.php" method="post">
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" name="man" data-toggle="dropdown" id="mySelect">
+                                <option selected  disabled>Manufacturer</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Manufacturer) as Manufacturer from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Manufacturer'] . '">' . $row['Manufacturer'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" name="ram" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>RAM</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(RAM) as RAM from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['RAM'] . '">' . $row['RAM'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" name="cat" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>Category</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Category) as Category from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Category'] . '">' . $row['Category'] . '</option>';
+                                }
+
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" name="cpu" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>CPU</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(CPU) as CPU from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['CPU'] . '">' . $row['CPU'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-item dropdown d-flex">
+                            <select class="nav-link w-100 dropdown-select" name="storage" data-toggle="dropdown" id="mySelect">
+                                <option selected disabled>Storage</option>
+                                <?php
+                                include 'DBconn.php';
+                                $S1 = "SELECT  DISTINCT(Storage) as Storage from Laptops2";
+                                $ram = mysqli_query($connection, $S1);
+                                while ($row = mysqli_fetch_array($ram)) {
+                                    echo '<option value="' . $row['Storage'] . '">' . $row['Storage'] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="nav-link text-center" style="border: 1px solid black; color: #D19C97;">
+                            <span id="price-value">$1500</span>
+                            <input style="border-radius:2px;" type="range" class="w-75" id="price-filter" name="price" min="200" max="3000" value="1500">
+                        </div>
+                        <div  style="text-align: center;" id="sub">
+                            <button type="submit" name="sub"  class="btn btn-primary w-100">Submit</button>
+                        </div>
+                </div>
+
+
+
+                </form>
+            </nav>
 
 
         </div>
-        <!-- Shop Sidebar End -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         <!-- Shop Product Start -->
@@ -155,7 +435,7 @@
                 }
 
                 //print_r($sample[0][1]);
-                if (isset($_POST['sub'])) {
+                if (isset($_POST['sub']) and isset($_POST['cat']) and isset($_POST['man']) and isset($_POST['ram'])  and isset($_POST['cpu']) and isset($_POST['price']) and isset($_POST['storage'])) {
                     $man = $_POST['man'];
                     $cat = $_POST['cat'];
                     $ram = $_POST['ram'];
@@ -186,11 +466,11 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-between bg-light border">
                                 <form method="post" action="detail.php">
-                        <button type="submit" class="btn btn-sm text-dark p-0" value="' . $row['id'] . '"  name="detail" style="background-color:white" ><i class="fas fa-eye text-primary mr-1"></i>View Detail</button>
+                        <button type="submit" class="btn btn-sm text-dark p-0" value="l' . $row['id'] . '"  name="detail" style="background-color:white" ><i class="fas fa-eye text-primary mr-1"></i>View Detail</button>
                             <h5>&nbsp;</h5>
                             </form>
                             <form method="post" action="cartCode.php">
-                            <button type="submit" class="btn btn-sm text-dark p-0" value="l'. $row['id'] .'"  name="cart" style="background-color:white" ><i class="fas fa-shopping-cart text-primary mr-1"></i>Add Cart</button>
+                            <button type="submit" class="btn btn-sm text-dark p-0" value="l' . $row['id'] . '"  name="cart" style="background-color:white" ><i class="fas fa-shopping-cart text-primary mr-1"></i>Add Cart</button>
                                 <h5>&nbsp;</h5>
                                 </form>
                 
@@ -212,4 +492,4 @@
 
 
 <!-- Footer Start -->
-<?php include'footer1.php'?>
+<?php include 'footer1.php' ?>

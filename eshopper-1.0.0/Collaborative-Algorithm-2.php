@@ -1,7 +1,4 @@
 
-
-
-
 <?php
 include 'DBconn.php';
 
@@ -193,9 +190,9 @@ $items_Predict = Get_All_Predict_Items($predict_Item_user);
 $items_Ratting_User = Get_All_Ratting_Items_byUser($predict_Item_user);
 
 
-if(count($items_Ratting_User) <= count($items_Predict) && count($items_Ratting_User)==0)
+if(!(count($items_Ratting_User)>= count($items_Predict)))
 {
-    //echo "<div > New User";
+    echo "<div > New User";
 }
 
 else{
@@ -224,6 +221,8 @@ else{
                 $rattingOfRecommendItem += $wight*$items_Ratting[$subItem][$predict_Item_user-1];
     
                 $sumOfWight+= $wight;
+                $i++;
+
             }
             //echo $item."<br>";
     
@@ -245,26 +244,27 @@ else{
     // echo "</pre>";
     //Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user);
     
-    echo "<div style='text-align: center;'>";
+    //echo "<div style='text-align: center;'>";
     
     $rattingOFAllRecommendationItems = Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user);
     
-    
-    echo "<pre>";
-    print_r($rattingOFAllRecommendationItems);
-    echo "</pre>";
+
+    //echo "<pre>";
+    //print_r($rattingOFAllRecommendationItems);
+    //echo "</pre>";
     
     //get Item
     $getMaxRecommend_RattingOfItem =array_search(max($rattingOFAllRecommendationItems),$rattingOFAllRecommendationItems);
     
     
-    echo $getMaxRecommend_RattingOfItem; 
+    //echo $getMaxRecommend_RattingOfItem; 
     // echo "<pre>";
     // print_r(Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user));
     // echo "</pre>";
     
     
-    echo "</div>";
+    //echo "</div>";
+    $_SESSION['rattingOFAllRecommendationItems'] = $rattingOFAllRecommendationItems;
     
 }
 

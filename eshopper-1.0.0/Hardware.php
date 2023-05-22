@@ -71,7 +71,7 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
                             <form method="post" action="detail.php">
-                    <button type="submit" class="btn btn-sm text-dark p-0" value=""  name="detail" style="background-color:white" ><i class="fas fa-eye text-primary mr-1"></i>View Detail</button>
+                    <button type="submit" class="btn btn-sm text-dark p-0" value="h' . $row['Id'] . '" name="detail" style="background-color:white" ><i class="fas fa-eye text-primary mr-1"></i>View Detail</button>
                         <h5>&nbsp;</h5>
                         </form>
                         <form method="post" action="cartCode.php">
