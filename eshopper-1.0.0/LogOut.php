@@ -1,7 +1,8 @@
 <?php 
 include 'DBconn.php';
-session_start();
 
+session_start();
+//include 'FinalRatting.php';
 $a = $connection;
 
 session_unset();

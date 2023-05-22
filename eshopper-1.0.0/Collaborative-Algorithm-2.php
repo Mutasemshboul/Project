@@ -182,7 +182,7 @@ function Get_Recommend_Item($items_Ratting,$item,$nearNeighborItem)
 
 
 //from session.
-$predict_Item_user = 5;
+$predict_Item_user = $_SESSION['UserID'];
 $ItemOfRecommendation = [];
 
 
@@ -193,55 +193,80 @@ $items_Predict = Get_All_Predict_Items($predict_Item_user);
 $items_Ratting_User = Get_All_Ratting_Items_byUser($predict_Item_user);
 
 
-
-
-
-foreach($items_Predict as $item)
+if(count($items_Ratting_User) <= count($items_Predict) && count($items_Ratting_User)==0)
 {
-
-    $itemOfRecommendation[$item] = Get_Recommend_Item($items_Ratting2,$item,$items_Ratting_User);
+    //echo "<div > New User";
 }
 
-//Get the rating that the item will be suggested by the user
-function Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user)
-{
-    $rattingOFAllRecommendationItems=array();
-    
-    foreach($itemOfRecommendation as $item =>$val)
+else{
+
+    foreach($items_Predict as $item)
     {
-        $rattingOfRecommendItem=0;
-        $sumOfWight=0;
-        
-        $i =0;
-        foreach($val as $subItem => $wight)
-        {
-            if($i==2)break;
-
-            $rattingOfRecommendItem += $wight*$items_Ratting[$subItem][$predict_Item_user-1];
-
-            $sumOfWight+= $wight;
-        }
-        //echo $item."<br>";
-
-        $rattingOFAllRecommendationItems[$item] =  round($rattingOfRecommendItem/$sumOfWight,2);
-        
+    
+        $itemOfRecommendation[$item] = Get_Recommend_Item($items_Ratting2,$item,$items_Ratting_User);
     }
-
-    arsort($rattingOFAllRecommendationItems);
-    return $rattingOFAllRecommendationItems;
-
-
-   
+    
+    //Get the rating that the item will be suggested by the user
+    function Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user)
+    {
+        $rattingOFAllRecommendationItems=array();
+        
+        foreach($itemOfRecommendation as $item =>$val)
+        {
+            $rattingOfRecommendItem=0;
+            $sumOfWight=0;
+            
+            $i =0;
+            foreach($val as $subItem => $wight)
+            {
+                if($i==2)break;
+    
+                $rattingOfRecommendItem += $wight*$items_Ratting[$subItem][$predict_Item_user-1];
+    
+                $sumOfWight+= $wight;
+            }
+            //echo $item."<br>";
+    
+            $rattingOFAllRecommendationItems[$item] =  round($rattingOfRecommendItem/$sumOfWight,2);
+            
+        }
+    
+        arsort($rattingOFAllRecommendationItems);
+        
+        return $rattingOFAllRecommendationItems;
+    
+    
+       
+    }
+    
+    // $recommendItem  = array_search(max($items_Similarity),$items_Similarity);
+    // echo "<pre>";
+    // print_r($itemOfRecommendation);
+    // echo "</pre>";
+    //Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user);
+    
+    echo "<div style='text-align: center;'>";
+    
+    $rattingOFAllRecommendationItems = Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user);
+    
+    
+    echo "<pre>";
+    print_r($rattingOFAllRecommendationItems);
+    echo "</pre>";
+    
+    //get Item
+    $getMaxRecommend_RattingOfItem =array_search(max($rattingOFAllRecommendationItems),$rattingOFAllRecommendationItems);
+    
+    
+    echo $getMaxRecommend_RattingOfItem; 
+    // echo "<pre>";
+    // print_r(Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user));
+    // echo "</pre>";
+    
+    
+    echo "</div>";
+    
 }
-
-// $recommendItem  = array_search(max($items_Similarity),$items_Similarity);
-// echo "<pre>";
-// print_r($itemOfRecommendation);
-// echo "</pre>";
-//Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user);
-echo "<pre>";
-print_r(Get_Recommend_RattingOfItem($itemOfRecommendation,$items_Ratting,$predict_Item_user));
-echo "</pre>";
 
 
 ?>

@@ -2,8 +2,12 @@
 include 'DBconn.php';
 session_start();
 
+
 $id = substr($_POST["Delete"],1,);
 $userId=$_SESSION['UserID'];
+
+include 'CartDelete.php';
+
 if($_POST["Delete"][0]=='l'){
     $sql = "delete from shppoingcart where Id = $id ";
 }
@@ -13,4 +17,5 @@ else{
 
 mysqli_query($connection,$sql);
 header('location:cart.php');
+$_SESSION['$isItemCartDelete'] = true;
 ?>

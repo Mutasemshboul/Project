@@ -1,11 +1,12 @@
-<?php include 'header.php'?>
+<?php include 'header.php';
+    
+        ?>
     <!-- Navbar End -->
 
 
     <!-- Page Header Start -->
 
-    <!-- Page Header End -->
-
+    <!-- Page Header End --
 
     <!-- Cart Start -->
     <div class="container-fluid pt-5">
@@ -59,6 +60,9 @@
                         }
                         $sql ='select * from hardwareshoppingcart where UserId  = '.$_SESSION['UserID'].'';
                         $res = mysqli_query($connection,$sql);
+
+                     
+                       
                         while($row=mysqli_fetch_array($res)){
                             $sql2 ='select * from hardware where Id ='.$row['HardwareId'].'';
                             $res2 = mysqli_query($connection,$sql2);
@@ -132,5 +136,13 @@
     </div>
     <!-- Cart End -->
 
+<?php 
 
-   <?php include 'footer1.php'?>
+//include 'FinalRatting.php';
+
+
+include 'Collaborative-Algorithm-2.php';
+
+?>
+
+<?php include 'footer1.php'?>
