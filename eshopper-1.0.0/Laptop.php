@@ -352,9 +352,9 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="nav-link text-center" style="border: 1px solid black; color: #D19C97;">
+                        <div class="nav-link text-center" style="border: 1px solid black; color:#D19C97;">
                             <span id="price-value">$1500</span>
-                            <input style="border-radius:2px;" type="range" class="w-75" id="price-filter" name="price" min="200" max="3000" value="1500">
+                            <input style="border-radius:2px; color:#D19C97;" type="range" class="w-75" id="price-filter" name="price" min="200" max="3000" value="1500">
                         </div>
                         <div  style="text-align: center;" id="sub">
                             <button type="submit" name="sub"  class="btn btn-primary w-100">Submit</button>

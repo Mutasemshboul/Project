@@ -56,7 +56,8 @@ if (empty($_SESSION['UserID'])) {
         #mySelect {
             appearance: none;
         }
-        
+
+
     </style>
 
 

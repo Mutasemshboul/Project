@@ -154,6 +154,7 @@ foreach($frequentItemsets as $I=>$v){
   break;
   echo"<br>";
 }
+$_SESSION['pakageOfItem']=$pakageOfItem;
 //print_r($parr)
 //print_r($arr);
 

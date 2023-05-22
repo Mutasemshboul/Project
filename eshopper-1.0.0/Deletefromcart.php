@@ -14,7 +14,7 @@ if($_POST["Delete"][0]=='l'){
 else{
     $sql = "delete from hardwareshoppingcart where Id = $id ";
 }
-
+$_SESSION['ItemDelete'][$id]=$_POST["Delete"][0];
 mysqli_query($connection,$sql);
 header('location:cart.php');
 $_SESSION['$isItemCartDelete'] = true;

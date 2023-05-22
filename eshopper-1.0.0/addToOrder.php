@@ -1,20 +1,42 @@
 <?php
 include 'DBconn.php';
 session_start();
+
+
 $userId=$_SESSION['UserID'];
-echo $userId;
+//echo $userId;
+
+///Insert Hardware
 $sql = "SELECT * FROM `hardwareshoppingcart` WHERE UserId  =$userId ";
 $result = mysqli_query($connection,$sql);
 while($rwo = mysqli_fetch_array($result)){
     $proId  = $rwo['HardwareId'];
-    echo $proId." ";
-    $sql2="insert into orders values('',$userId,$proId)";
-    mysqli_query($connection,$sql2);
+    $_SESSION['ItemBuy'][$proId] = 'h';
+
+   
+    // $sql2="insert into orders values('',$userId,$proId)";
+    // mysqli_query($connection,$sql2);
 }
 
-$sql3 = "delete from hardwareshoppingcart where UserId   = $userId";
-mysqli_query($connection,$sql3);
-header('location:cart.php');
+
+echo "<hr>";
+//insert Laptop
+$sql3 = "SELECT * FROM `shppoingcart` WHERE UserId  =$userId ";
+$result = mysqli_query($connection,$sql3);
+while($rwo = mysqli_fetch_array($result)){
+    $proId  = $rwo['ProductID'];
+    $_SESSION['ItemBuy'][$proId] = 'l';
+    
+   
+
+    // $sql4="insert into orders values('',$userId,$proId)";
+    // mysqli_query($connection,$sql4);
+}
+
+
+// $sql3 = "delete from hardwareshoppingcart where UserId   = $userId";
+// mysqli_query($connection,$sql3);
+// header('location:cart.php');
 
 
 

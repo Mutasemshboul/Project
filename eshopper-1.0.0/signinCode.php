@@ -15,6 +15,11 @@ if(isset($_POST['submit'])){
     $_SESSION['Email']=$row['Email'];
     $_SESSION['RoleFk'] = $row['Role'];
     $_SESSION['Name'] = $row['Name'];
+   
+    $_SESSION['ItemDelete'] = array();
+    $_SESSION['ItemView']   = array();
+    $_SESSION['ItemBuy'] = array();
+
 
     if($row){
         if($row['Role']==2){

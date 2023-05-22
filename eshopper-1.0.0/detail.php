@@ -47,8 +47,11 @@
             include 'DBconn.php';
 
 
-            $id = substr($_POST["detail"], 1,);
-            if ($_POST["detail"][0] == 'l') {
+            if(isset($_POST["detail"]))
+            $_SESSION['id'] =  $_POST["detail"];
+            $id = $_SESSION['id'];
+            $id = substr($id, 1,);
+            if ($_SESSION['id'][0] == 'l') {
                 $sql = "select * from laptops2 where id = $id";
                 $res = mysqli_query($connection, $sql);
                 $row = mysqli_fetch_array($res);
@@ -56,24 +59,26 @@
                 echo '<h3 class="font-weight-semi-bold mb-4">$' . $row['price'] . '</h3>
                     <p class="mb-4"> ' . $row['manufacturer'] . ' ' . $row['model_name'] . ' - ' . $row['cpu'] . ' - ' . $row['category'] . ' - ' . $row['ram'] . 'GB RAM</p>';
 
-                echo'<form method="post" action="cartCode.php">
-                <button class="btn btn-primary px-3" name="cart" value='.$_POST["detail"].'><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
-            </form>';    
-            }
-            else{
+                echo '<form method="post" action="cartCode.php">
+                <button class="btn btn-primary px-3" name="cart" value=' . $_SESSION['id'] . '><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+            </form>';
+            } else {
                 $sql = "select * from hardware where id = $id";
                 $res = mysqli_query($connection, $sql);
                 $row = mysqli_fetch_array($res);
                 echo '<h3 class="font-weight-semi-bold">' . $row['Name'] . ' - ' . $row['Category'] . '</h3>';
                 echo '<h3 class="font-weight-semi-bold mb-4">$' . $row['Price'] . '</h3>
-                    <p class="mb-4"> ' . $row['Name'] . ' - ' . $row['Category'].'</p>';
-                    echo'<form method="post" action="cartCode.php">
-                    <button class="btn btn-primary px-3" name="cart" value='.$_POST["detail"].'><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    <p class="mb-4"> ' . $row['Name'] . ' - ' . $row['Category'] . '</p>';
+                echo '<form method="post" action="cartCode.php">
+                    <button class="btn btn-primary px-3" name="cart" value=' . $_SESSION['id'] . '><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                 </form>';
             }
 
-           
 
+        
+            $_SESSION['ItemView'][$id] = $_SESSION['id'][0];
+
+   
 
             ?>
 
@@ -89,7 +94,7 @@
                 </div> -->
 
 
-            
+
         </div>
     </div>
 </div>
@@ -207,7 +212,7 @@
 <!-- Products Start -->
 <div class="container-fluid pt-5">
     <div class="text-center mb-4">
-        <h2 class="section-title px-5"><span class="px-2">Trandy Products</span></h2>
+        <h2 class="section-title px-5"><span class="px-2">Discount 20%</span></h2>
     </div>
 
 
@@ -249,88 +254,81 @@
 
         </div> -->
 </div>
- <div class="container-fluid offer pt-10">
-        <div class="row px-xl-5">
-            <div class="col-md-10 pb-10">
-                <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+<div class="container-fluid offer pt-10">
+    <div class="row px-xl-5">
+        <div class="col-md-10 pb-10">
+            <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
                 <div class="row px-xl-5 pb-3">
-            <?php
-            include 'DBconn.php';
-            include 'apriori.php';
-                $S1 = "SELECT  DISTINCT(UserID) as UserID from Orders";
+                    <?php
+                    include 'DBconn.php';
+                    include 'apriori.php';
+                    $S1 = "SELECT  DISTINCT(UserID) as UserID from orders";
 
-                $user=mysqli_query($connection,$S1);
-
-
-                $arr_users = array();
+                    $user = mysqli_query($connection, $S1);
 
 
-
-                while($Row = mysqli_fetch_array($user))
-                {
-                    array_push($arr_users,$Row["UserID"]);
-                }
+                    $arr_users = array();
 
 
-                $arr=[];
-                for($i=0;$i<count($arr_users);$i++){
-                    $S2=  "select ProductID from Orders where UserID='.$arr_users[$i].'";
-                    $res = mysqli_query($connection,$S2);
-                    while($row=mysqli_fetch_array($res)){
-                        $arr[$i][]=$row[0];
-                        //echo"<br>";
 
-                }
+                    while ($Row = mysqli_fetch_array($user)) {
+                        array_push($arr_users, $Row["UserID"]);
+                    }
 
-                }
 
-                $apriori = new Apriori($arr, 0.6);
-                $apriori->mineAssociations();
+                    $arr = [];
+                    for ($i = 0; $i < count($arr_users); $i++) {
+                        $S2 =  "select ProductID from orders where UserID='.$arr_users[$i].'";
+                        $res = mysqli_query($connection, $S2);
+                        while ($row = mysqli_fetch_array($res)) {
+                            $arr[$i][] = $row[0];
+                            //echo"<br>";
 
-                $frequentItemsets = $apriori->getFrequentItemsets($arr);
-                $parr = [];
-
-                //print_r($frequentItemsets);
-                foreach($frequentItemsets as $I=>$v){
-                  $parr = explode(" ",$I);
-                  //print_r(explode(" ",$I));
-                  break;
-                  echo"<br>";
-                }
-                foreach($parr as $I=>$v){
-                    $sql = "select * from product where ID = $v";
-                    $res = mysqli_query($connection,$sql);
-                    while($row=mysqli_fetch_array($res)){
-                        echo'<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                        }
+                    }
+                    $cnt=0;
+                    $lastItme = array_key_last($_SESSION['pakageOfItem']);
+                    foreach ($_SESSION['pakageOfItem'] as $Index => $Id) {
+                        $sql = "select * from hardware where Id = $Id";
+                        $res = mysqli_query($connection, $sql);
+                        while ($row = mysqli_fetch_array($res)) {
+                            echo '<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                 <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">'.$row['Name'].'</h6>
+                                <h6 class="text-truncate mb-3">' . $row['Name'] . '</h6>
                                 <div class="d-flex justify-content-center">
-                                    <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                    <h6>' . $row['Price'] . '</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                            </div>
+                            
                         </div>
-                    </div> <h1>+</h1>';
-
+                        
+                    </div> ';
+                    if($cnt!=count($_SESSION['pakageOfItem'])-1){
+                        echo '<div style="margin:30px 0px 30px 0; "><h1>+</h1></div>';
+                        $cnt++;
                     }
-                }
-
-
-            ?>
-        </div>
                     
-                </div>
-            </div>
+                        
+                    
+                        }
+                    }
 
+
+                    ?>
+
+                </div>
+                <form>
+                <button class="btn btn-primary px-3" name="cart" value=""><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                </form>
+            </div>
         </div>
-    </div> 
+
+    </div>
+</div>
 <!-- Products End -->
 
 
