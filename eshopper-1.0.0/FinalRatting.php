@@ -2,8 +2,9 @@
 
 <?php
 
-session_start();
+
 include 'DBconn.php';
+
 
 
 //user id
@@ -13,6 +14,7 @@ $userID = $_SESSION['UserID'];
 $_SESSION['ItemDelete'];
 $_SESSION['ItemView'];
 $_SESSION['ItemBuy'];
+
 //product id
 
 $map = [];
@@ -39,9 +41,10 @@ print_r($map);
 echo "</pre>";
 
 // // $arr = array_merge_recursive(
-// //     $_SESSION['ItemDelete'],
+// //     $_SESSION['ItemDelete'],[1 , 2, 3 , 5, 7 ]
+// //     $_SESSION['ItemDelete'],[1 , 5, 7 ]
 // //     $_SESSION['ItemView'],
-// //     $_SESSION['ItemBuy']
+// //     $_SESSION['ItemBuy'][1 , 5, 7, 4 , 7]
 // // );
 
 
@@ -49,6 +52,7 @@ foreach($map  as $index => $item)
 {
     $prodID =$item[0];
     $type = $item[1];
+
     $finalRattingItem = 0;
     $isItemBought=false;
     $isItemCartDelete=false;
@@ -72,7 +76,7 @@ foreach($map  as $index => $item)
     $c=0;
     if($type=='l'){
 
-        $q ="SELECT `rating` FROM `user_ratings` WHERE `item_id`=$prodID and `rating` != 0 and `Type`= 'L';";
+        $q ="SELECT `rating` FROM `user_ratings` WHERE `item_id`='$prodID' and (`rating` != '0' and `Type`='L')";
         
         $query = mysqli_query($connection,$q);
 
@@ -87,7 +91,7 @@ foreach($map  as $index => $item)
 
     else{
 
-        $q ="SELECT `rating` FROM `user_ratings` WHERE `item_id`=$prodID and `rating` != 0 and `Type`= 'L'";
+        $q ="SELECT `rating` FROM `user_ratings` WHERE `item_id`='$prodID' and (`rating` != '0' and `Type`='L') ";
         
         $query = mysqli_query($connection,$q);
 
@@ -224,7 +228,7 @@ foreach($map  as $index => $item)
             
 
             echo $finalRattingItem. "    ".$prodID."<br>"; 
-            $q = mysqli_query($connection,"INSERT INTO `recommend_items`(`userID`, `ItemID`, `rating`) VALUES ('$userID','$prodID','$finalRattingItem')");
+            $q = mysqli_query($connection,"INSERT INTO `recommend_items`(`userID`, `ItemID`, `rating`,`Type`) VALUES ('$userID','$prodID','$finalRattingItem','$type')");
 
             
 

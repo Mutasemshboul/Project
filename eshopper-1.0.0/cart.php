@@ -52,7 +52,9 @@
                                 </td>
                                 <td class="align-middle">$150</td>
                                 <form method="post" action="Deletefromcart.php">
-                                <td class="align-middle"><button value=l'.$row['Id'].'  name="Delete" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                <input hidden name="prodId" value='.$row['ProductID'].'></input>
+                                <td class="align-middle"><button value=l'.$row['Id'].' name="Delete" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                
                                 </form>
                             </tr>';
                             }
@@ -88,6 +90,7 @@
                                 <td class="align-middle">$150</td>
                                 <form method="post" action="Deletefromcart.php">
                                 <td class="align-middle"><button value=h'.$row['Id'].'  name="Delete" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                <input hidden name="prodId" value='.$row['HardwareId'].'></input>
                                 </form>
                             </tr>';
                             }

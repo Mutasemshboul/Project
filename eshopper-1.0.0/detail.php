@@ -46,7 +46,6 @@
             <?php
             include 'DBconn.php';
 
-
             if(isset($_POST["detail"]))
             $_SESSION['id'] =  $_POST["detail"];
             $id = $_SESSION['id'];
@@ -73,7 +72,6 @@
                     <button class="btn btn-primary px-3" name="cart" value=' . $_SESSION['id'] . '><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
                 </form>';
             }
-
 
         
             $_SESSION['ItemView'][$id] = $_SESSION['id'][0];
