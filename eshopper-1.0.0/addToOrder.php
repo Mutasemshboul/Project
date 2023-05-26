@@ -13,9 +13,12 @@ while($rwo = mysqli_fetch_array($result)){
     $proId  = $rwo['HardwareId'];
     $_SESSION['ItemBuy'][$proId] = 'h';
 
+    $sql3 = "delete from hardwareshoppingcart where UserId   = $userId";
+    mysqli_query($connection,$sql3);
+    header('location:cart.php');
    
-    // $sql2="insert into orders values('',$userId,$proId)";
-    // mysqli_query($connection,$sql2);
+    $sql2="insert into orders values('',$userId,$proId)";
+    mysqli_query($connection,$sql2);
 }
 
 
@@ -27,16 +30,19 @@ while($rwo = mysqli_fetch_array($result)){
     $proId  = $rwo['ProductID'];
     $_SESSION['ItemBuy'][$proId] = 'l';
     
+
+    $sql3 = "delete from shppoingcart where UserId   = $userId";
+    mysqli_query($connection,$sql3);
+    header('location:cart.php');
    
 
-    // $sql4="insert into orders values('',$userId,$proId)";
-    // mysqli_query($connection,$sql4);
+    
 }
 
 
-// $sql3 = "delete from hardwareshoppingcart where UserId   = $userId";
-// mysqli_query($connection,$sql3);
-// header('location:cart.php');
+$sql3 = "delete from hardwareshoppingcart where UserId   = $userId";
+mysqli_query($connection,$sql3);
+header('location:cart.php');
 
 
 

@@ -19,7 +19,22 @@ if(isset($_POST['submit'])){
     $_SESSION['ItemDelete'] = array();
     $_SESSION['ItemView']   = array();
     $_SESSION['ItemBuy'] = array();
+    $_SESSION['rattingOFAllRecommendationItems'] = array();
 
+
+    //add zero ratting for new user
+    //1- retrive data form laptops 
+
+    $userID = $row['ID'];
+    $query_laptops = "SELECT `id` FROM `laptops2`";
+    $execution_Query =mysqli_query($connection,$query_laptops); 
+    
+    // while($listOfLaptops = mysqli_fetch_assoc($execution_Query))
+    // {
+    //     $prodID = $listOfLaptops['id'];
+    //     mysqli_query($connection,"INSERT INTO `recommend_items`(`userID`, `ItemID`, `rating`,`Type`) VALUES ('$userID','$prodID','0','l')");
+    // }
+    
 
     if($row){
         if($row['Role']==2){

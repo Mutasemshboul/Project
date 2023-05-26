@@ -6,7 +6,7 @@
 include 'DBconn.php';
 
 
-
+//session_start();
 //user id
 $userID = $_SESSION['UserID'];
 
@@ -14,6 +14,21 @@ $userID = $_SESSION['UserID'];
 $_SESSION['ItemDelete'];
 $_SESSION['ItemView'];
 $_SESSION['ItemBuy'];
+
+
+echo "<pre>";
+print_r($_SESSION['ItemDelete']);
+echo "</pre>";
+
+echo "<pre>";
+print_r($_SESSION['ItemView']);
+echo "</pre>";
+
+echo "<pre>";
+print_r($_SESSION['ItemBuy']);
+echo "</pre>";
+
+
 
 //product id
 
@@ -26,12 +41,19 @@ foreach ($_SESSION['ItemDelete'] as $item => $type) {
 
 
 foreach ($_SESSION['ItemView'] as $item => $type) {
-    $map[$i] = [$item,$type];
+
+    if (!in_array([$item,$type], $map)){
+        $map[$i] = [$item,$type];
+    }
+        
+    
     $i++;
 }
 
 foreach ($_SESSION['ItemBuy'] as $item => $type) {
-    $map[$i] = [$item,$type];
+    if (!in_array([$item,$type], $map)){
+        $map[$i] = [$item,$type];
+    }
     $i++;
 }
 
@@ -228,7 +250,7 @@ foreach($map  as $index => $item)
             
 
             echo $finalRattingItem. "    ".$prodID."<br>"; 
-            $q = mysqli_query($connection,"INSERT INTO `recommend_items`(`userID`, `ItemID`, `rating`,`Type`) VALUES ('$userID','$prodID','$finalRattingItem','$type')");
+            mysqli_query($connection,"INSERT INTO `recommend_items`(`userID`, `ItemID`, `rating`,`Type`) VALUES ('$userID','$prodID','$finalRattingItem','$type')");
 
             
 

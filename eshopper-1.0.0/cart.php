@@ -1,4 +1,5 @@
 <?php include 'header.php';
+
     include 'Collaborative-Algorithm-2.php';
         ?>
     <!-- Navbar End -->
@@ -161,10 +162,11 @@
                         </div>
                     </div> -->
                     <?php
-                    $listOfItme = $_SESSION['rattingOFAllRecommendationItems'];
-
-                    //echo print_r($listOfItme);
-                    foreach($listOfItme as $id=>$rating){
+                    $listOfItem = $_SESSION['rattingOFAllRecommendationItems'];
+                    
+                    if(isset($listOfItem)){
+                   
+                    foreach($listOfItem as $id=>$rating){
 
                         echo'<div class="card product-item border-0">
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
@@ -183,9 +185,9 @@
                     </div>';
 
                     }
+                }
+                
 
-                    
-                    
                     ?>
                    
                     <!-- <div class="card product-item border-0">
